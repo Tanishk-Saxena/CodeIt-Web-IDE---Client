@@ -220,9 +220,16 @@ code {
   justify-content: space-between;
 }
 
-.editor-field {
+.editor-container {
   height: 90%;
-  overflow: scroll;
+}
+
+.editor-field {
+  height: 100%;
+  width: calc(100% - 6px);
+  resize: none;
+  word-wrap: normal;
+  font-size: 1rem;
 }
 
 .editor-field::-webkit-scrollbar {
@@ -288,27 +295,49 @@ code {
 
 .output-container {
   height: 85%;
-  background-color: whitesmoke;
+  background-color: rgb(199, 199, 199);
 }
 
 .output-field {
+  height: calc(100% - 10px);
+  margin: 5px;
   font-size: 1rem;
-  max-height: 90%;
+}
+
+.run-output {
+  height: calc(90% - 5px);
   overflow: scroll;
-  margin: 10px 5px;
+  margin: 5px 0;
   background-color: white;
 }
 
-.output-field::-webkit-scrollbar {
+.run-output::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
-.output-field::-webkit-scrollbar-thumb {
+.run-output::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 25px;
 }
 
-.output-field::-webkit-scrollbar-thumb:hover {
+.run-output::-webkit-scrollbar-thumb:hover {
   background: rgb(95, 95, 95);
+}
+
+.decodedError {
+  color: rgb(255, 35, 35);
+}
+
+.decodedCompileOutput {
+  color: rgb(187, 154, 8);
+}
+
+.details {
+  display: flex;
+  flex-basis: 33%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  height: 10%;
 }

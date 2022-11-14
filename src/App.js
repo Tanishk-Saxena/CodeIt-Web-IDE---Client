@@ -9,7 +9,7 @@ function App() {
   const [language, setLanguage] = useState("");
   const [inputs, setInputs] = useState("");
   const [code, setCode] = useState("");
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState({});
   const [loading, setLoading] = useState(false);
 
   return (

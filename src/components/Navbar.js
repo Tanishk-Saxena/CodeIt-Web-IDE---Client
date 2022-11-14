@@ -3,10 +3,10 @@ import Select from 'react-select';
 import logo from '../code.svg';
 
 const languages = [
-  {label: "C++", value: "cpp"},
-  {label: "Java", value: "java"},
-  {label: "Python", value: "py"},
-  {label: "Javascript", value: "js"}
+  {label: "C++", value: 54},
+  {label: "Java", value: 62},
+  {label: "Python", value: 71},
+  {label: "Javascript", value: 63}
 ]
 
 const Navbar = ({setLanguage}) => {
