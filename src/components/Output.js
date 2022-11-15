@@ -18,9 +18,9 @@ const Output = ({output, loading}) => {
                 {decodedCompileOutput && <div className="item decodedCompileOutput">{decodedCompileOutput}</div>}
               </div>
               <div className="details">
-                {(exit_code!==null || exit_code) && <div className="item exitCode">Exit code: {exit_code}</div>}
+                {(exit_code) && <div className="item exitCode">Exit code: {exit_code}</div>}
                 {time && <div className="item time">Time: {time}</div>}
-                {(memory!==null || memory) && <div className="item memory">Memory: {memory}</div>}
+                {(memory) && <div className="item memory">Memory: {memory}</div>}
               </div>
             </div>
           }

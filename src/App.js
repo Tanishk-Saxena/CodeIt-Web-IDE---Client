@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar setLanguage={setLanguage} setCode={setCode}/>
+      <Navbar setLanguage={setLanguage}/>
       <div className="container">
         <Editor language={language} code={code} setCode={setCode} setOutput={setOutput} inputs={inputs} setLoading={setLoading}/>
         <Input inputs={inputs} setInputs={setInputs}/>

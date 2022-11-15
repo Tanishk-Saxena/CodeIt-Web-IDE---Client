@@ -8,7 +8,7 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
@@ -23,13 +23,12 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
       stdin: bufferObj2.toString('base64')
     }
     const jsonData = JSON.stringify(data);
-    console.log(jsonData);
     axios.post(
       "http://localhost:8080/run",
       {jsonData}
     ).then((res)=>{
       const { stdout, stderr, compile_output, exit_code, time, memory } = res.data;
-      let decodedOutput="", decodedError="", decodedCompileOutput=""
+      let decodedOutput="", decodedError="", decodedCompileOutput="";
       if(stdout){
         let bufferObj3 = Buffer.from(stdout, 'base64');
         decodedOutput = bufferObj3.toString('utf-8');
@@ -50,21 +49,16 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
         time,
         memory
       };
-      console.log(outputObject);
-      setOutput(outputObject)
+      setOutput(outputObject);
+      setLoading(false);
     }).catch((err)=>{
       console.log(err);
     })
-    setLoading(false);
   }
 
   const handleClear = () => {
     setCode("");
     setOutput("");
-  }
-
-  function onChange(newValue) {
-    console.log("change", newValue);
   }
 
   return (
@@ -82,7 +76,7 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
           <AceEditor
             placeholder="Type your code here"
             mode={language?(language.label==='c++'?'c_cpp':language.label): ""}
-            theme="monokai"
+            theme="github"
             name="code"
             className="editor-field"
             fontSize="1rem"
