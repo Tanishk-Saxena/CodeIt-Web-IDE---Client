@@ -3,10 +3,10 @@ import Select from 'react-select';
 import logo from '../code.svg';
 
 const languages = [
-  {label: "C++", value: 54},
-  {label: "Java", value: 62},
-  {label: "Python", value: 71},
-  {label: "Javascript", value: 63}
+  {label: "c++", value: 54},
+  {label: "java", value: 62},
+  {label: "python", value: 71},
+  {label: "javascript", value: 63}
 ]
 
 const Navbar = ({setLanguage}) => {
@@ -21,7 +21,7 @@ const Navbar = ({setLanguage}) => {
         </div>
       </div>
       <div className="select-container">
-        <Select isSearchable={true} className="select-dropdown" options={languages} placeholder="Choose your language..." onChange={(e)=>{setLanguage(e.value)}}/>
+        <Select isSearchable={true} className="select-dropdown" options={languages} placeholder="Choose your language..." onChange={(e)=>{setLanguage(e)}}/>
       </div>
     </div>
   )

@@ -1,6 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { render } from "react-dom";
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-c_cpp";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
 
 const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
   
@@ -9,7 +18,7 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
     let bufferObj1 = Buffer.from(code, 'utf-8');
     let bufferObj2 = Buffer.from(inputs, 'utf-8');
     const data = {
-      language_id: language,
+      language_id: language.value,
       source_code: bufferObj1.toString('base64'),
       stdin: bufferObj2.toString('base64')
     }
@@ -54,6 +63,10 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
     setOutput("");
   }
 
+  function onChange(newValue) {
+    console.log("change", newValue);
+  }
+
   return (
     <div className="editor">
         <div className="banner">
@@ -61,12 +74,33 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
             Editor
           </div>
           <div className="buttons">
-            <button className="run-btn" disabled={code==="" || language===""} onClick={handleRun}>Run</button>
+            <button className="run-btn" disabled={code==="" || language===null} onClick={handleRun}>Run</button>
             <button className="clear-btn" disabled={code===""} onClick={handleClear}>Clear</button>
           </div>
         </div>
         <div className="editor-container" id="editor-container">
-          <textarea name="code" className="editor-field" value={code} onChange={(e)=>{setCode(e.target.value)}}></textarea>
+          <AceEditor
+            placeholder="Type your code here"
+            mode={language?(language.label==='c++'?'c_cpp':language.label): ""}
+            theme="monokai"
+            name="code"
+            className="editor-field"
+            fontSize="1rem"
+            onChange={(newValue)=>{setCode(newValue)}}
+            showPrintMargin={true}
+            height= "100%"
+            width= "calc(100% - 6px)"
+            showGutter={true}
+            highlightActiveLine={true}
+            value={code}
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+              enableSnippets: false,
+              showLineNumbers: true,
+              tabSize: 2,
+            }}
+          />
         </div>
     </div>
   )

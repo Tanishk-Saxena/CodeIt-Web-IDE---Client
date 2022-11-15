@@ -47,6 +47,7 @@ code {
 
 .select-dropdown {
   width: 100%;
+  text-transform: capitalize;
 }
 
 @media screen and (max-width: 769px) {
@@ -224,14 +225,6 @@ code {
   height: 90%;
 }
 
-.editor-field {
-  height: 100%;
-  width: calc(100% - 6px);
-  resize: none;
-  word-wrap: normal;
-  font-size: 1rem;
-}
-
 .editor-field::-webkit-scrollbar {
   width: 5px;
 }
@@ -309,6 +302,7 @@ code {
   overflow: scroll;
   margin: 5px 0;
   background-color: white;
+  white-space: pre-wrap;
 }
 
 .run-output::-webkit-scrollbar {

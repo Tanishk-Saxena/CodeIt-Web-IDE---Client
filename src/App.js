@@ -6,7 +6,7 @@ import Output from "./components/Output";
 
 function App() {
 
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState(null);
   const [inputs, setInputs] = useState("");
   const [code, setCode] = useState("");
   const [output, setOutput] = useState({});
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar setLanguage={setLanguage}/>
+      <Navbar setLanguage={setLanguage} setCode={setCode}/>
       <div className="container">
         <Editor language={language} code={code} setCode={setCode} setOutput={setOutput} inputs={inputs} setLoading={setLoading}/>
         <Input inputs={inputs} setInputs={setInputs}/>
