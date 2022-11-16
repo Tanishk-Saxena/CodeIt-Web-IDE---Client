@@ -9,14 +9,14 @@ function App() {
   const [language, setLanguage] = useState(null);
   const [inputs, setInputs] = useState("");
   const [code, setCode] = useState("");
-  const [output, setOutput] = useState({});
+  const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
 
   return (
     <div className="App">
       <Navbar setLanguage={setLanguage}/>
       <div className="container">
-        <Editor language={language} code={code} setCode={setCode} setOutput={setOutput} inputs={inputs} setLoading={setLoading}/>
+        <Editor language={language} code={code} inputs={inputs} output={output} setCode={setCode} setOutput={setOutput} setLoading={setLoading}/>
         <Input inputs={inputs} setInputs={setInputs}/>
         <Output output={output} loading={loading}/>
       </div>
