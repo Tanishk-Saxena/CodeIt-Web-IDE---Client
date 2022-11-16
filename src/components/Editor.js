@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from "react-dom";
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import AceEditor from "react-ace";

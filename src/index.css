@@ -33,7 +33,7 @@ code {
   font-size: 1.8rem;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .brand .logo {
@@ -60,19 +60,19 @@ code {
   }
 
   .brand .logo img {
-    height: 48px;
-    width: 48px;
+    height: 40px;
+    width: 40px;
   }
 
   .select-container {
     width: 30vw;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
 @media screen and (max-width: 426px) {
   .navbar .brand {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .brand .logo {
@@ -80,13 +80,13 @@ code {
   }
 
   .brand .logo img {
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
   }
 
   .select-container {
     width: 33vw;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -103,23 +103,6 @@ code {
   margin: 10px auto;
 }
 
-@media screen and (max-width: 769px) {
-  .container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
-  }
-}
-
-@media screen and (max-width: 426px) {
-  .container {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(0, 2fr) repeat(2, 1fr);
-  }
-}
-
-
-/* grid components */
-
 /* general props */
 .container > * {
   border-radius: 20px;
@@ -132,27 +115,29 @@ code {
 /* specific props */
 .container > :first-child {
   grid-row-start: 1;
-  grid-row-end: span 2;
-}
-
-.container > :last-child {
-  grid-column-start: 2;
+  grid-row-end: 3;
 }
 
 @media screen and (max-width: 769px) {
+  .container {
+    height: 120vh;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+  }
   .container > :first-child {
+    grid-row-end: 2;
     grid-column-start: 1;
-    grid-column-end: span 2;
+    grid-column-end: 3;
   }
 }
 
 @media screen and (max-width: 426px) {
-  .container > :first-child {
-    grid-column: 1;
+  .container {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 4fr) repeat(2, minmax(0, 2fr));
   }
-  
-  .container > :last-child {
-    grid-column: 1;
+  .container > :first-child {
+    grid-column-end: 2;
   }
 }
 
