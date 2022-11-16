@@ -10,7 +10,7 @@ const Output = ({output, loading}) => {
         </div>
         <div className="output-container">
           {loading && <Spinner />}
-          {loading===false && 
+          {output && 
             <div className="output-field">
               <div className="run-output">
                 {decodedOutput && <div className="item decodedOutput">{decodedOutput}</div>}
