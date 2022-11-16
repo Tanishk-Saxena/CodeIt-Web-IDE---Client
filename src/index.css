@@ -159,43 +159,93 @@ code {
 /* buttons */
 .buttons{
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .run-btn {
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  background-color: black;
   cursor: pointer;
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: opacity(0.8);
+}
+
+.run-btn img {
+  height: 28px;
+  width: 28px;
+}
+
+.run-btn:disabled, .run-btn:disabled:active{
+  filter: opacity(0.6);
+  background-color: white;
+  cursor: default;
 }
 
 .run-btn:active {
-  background-color: rgb(39, 39, 39);
+  filter: opacity (1);
+  filter:  brightness(0.8);
 }
 
-.run-btn:disabled{
-  background-color: rgb(223, 223, 223);
+.copy-btn {
+  cursor: pointer;
+  height: 28px;
+  width: 28px;
+  padding: 0;
   border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: opacity(0.8);
+}
+
+.copy-btn img {
+  height: 24px;
+  width: 24px;
+}
+
+.copy-btn:disabled, .copy-btn:disabled:active{
+  filter: opacity(0.6);
+  background-color: transparent;
   cursor: default;
+}
+
+.copy-btn:active {
+  filter: opacity(1);
 }
 
 .clear-btn {
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  background-color: black;
   cursor: pointer;
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: opacity(0.8);
+}
+
+.clear-btn img {
+  height: 24px;
+  width: 24px;
+}
+
+.clear-btn:disabled, .clear-btn:disabled:active{
+  filter: opacity(0.6);
+  background-color: transparent;
+  cursor: default;
 }
 
 .clear-btn:active {
-  background-color: rgb(39, 39, 39);
-}
-
-.clear-btn:disabled{
-  background-color: rgb(223, 223, 223);
-  border: none;
-  cursor: default;
+  filter: opacity(1);
 }
 
 

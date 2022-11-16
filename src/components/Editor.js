@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import AceEditor from "react-ace";
+import clear from '../clear.png';
+import run from '../run.png';
+import copy from '../copy.png';
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
@@ -10,7 +13,7 @@ import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 
-const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
+const Editor = ({language, code, inputs, output, setCode, setOutput, setLoading}) => {
   
   const handleRun = () => {
     setLoading(true);
@@ -60,6 +63,10 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
     setOutput("");
   }
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+  }
+
   return (
     <div className="editor">
         <div className="banner">
@@ -67,8 +74,15 @@ const Editor = ({language, code, inputs, setCode, setOutput, setLoading}) => {
             Editor
           </div>
           <div className="buttons">
-            <button className="run-btn" disabled={code==="" || language===null} onClick={handleRun}>Run</button>
-            <button className="clear-btn" disabled={code===""} onClick={handleClear}>Clear</button>
+            <button className="run-btn" disabled={code==="" || language===null} onClick={handleRun}>
+              <img src={run} alt="Run" />
+            </button>
+            <button className="copy-btn" disabled={code===""} onClick={handleCopy}>
+              <img src={copy} alt="Copy" />
+            </button>
+            <button className="clear-btn" disabled={code==="" && output===""} onClick={handleClear}>
+              <img src={clear} alt="Clear" />
+            </button>
           </div>
         </div>
         <div className="editor-container" id="editor-container">
