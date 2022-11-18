@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import AceEditor from "react-ace";
+import ReactTooltip from "react-tooltip";
 import clear from '../clear.png';
 import run from '../run.png';
 import copy from '../copy.png';
@@ -10,12 +11,13 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 
-const Editor = ({language, code, inputs, output, setCode, setOutput, setLoading}) => {
+const Editor = ({language, code, inputs, output, loading, setCode, setOutput, setLoading}) => {
   
-  const handleRun = () => {
+  const handleRun1 = () => {
+    setOutput("");
     setLoading(true);
     let bufferObj1 = Buffer.from(code, 'utf-8');
     let bufferObj2 = Buffer.from(inputs, 'utf-8');
@@ -58,9 +60,38 @@ const Editor = ({language, code, inputs, output, setCode, setOutput, setLoading}
     })
   }
 
+  const handleRun2 = () => {
+    setOutput("");
+    setLoading(true);
+    let bufferObj1 = Buffer.from(code, 'utf-8');
+    let bufferObj2 = Buffer.from(inputs, 'utf-8');
+    const data = {
+      language: language.label,
+      source_code: bufferObj1.toString('base64'),
+      stdin: bufferObj2.toString('base64')
+    }
+    const jsonData = JSON.stringify(data);
+    axios.post(
+      "http://localhost:9999/run",
+      {jsonData}
+    ).then((res)=>{
+      const { stdout, stderr, compile_output} = res.data;
+      let outputObject = {
+        decodedOutput: stdout,
+        decodedError: stderr,
+        decodedCompileOutput: compile_output
+      };
+      setOutput(outputObject);
+      setLoading(false);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
   const handleClear = () => {
     setCode("");
     setOutput("");
+    setLoading(false);
   }
 
   const handleCopy = () => {
@@ -74,22 +105,29 @@ const Editor = ({language, code, inputs, output, setCode, setOutput, setLoading}
             Editor
           </div>
           <div className="buttons">
-            <button className="run-btn" disabled={code==="" || language===null} onClick={handleRun}>
+            <button data-tip='run' className="run-btn" disabled={code==="" || language===null} onClick={handleRun2}>
               <img src={run} alt="Run" />
             </button>
-            <button className="copy-btn" disabled={code===""} onClick={handleCopy}>
+            <button data-tip data-for="copy" className="copy-btn" disabled={code===""} onClick={handleCopy}>
               <img src={copy} alt="Copy" />
             </button>
-            <button className="clear-btn" disabled={code==="" && output===""} onClick={handleClear}>
+            <button data-tip='clear' className="clear-btn" disabled={code==="" && output==="" && loading===false} onClick={handleClear}>
               <img src={clear} alt="Clear" />
             </button>
+            <ReactTooltip effect='solid' place='bottom'/>
+            <ReactTooltip id="copy" aria-haspopup="true" place="bottom" effect="solid" event="click" eventOff="mouseleave">
+              Copied
+            </ReactTooltip>
+            <ReactTooltip id="copy" aria-haspopup="true" place="bottom" effect="solid" event="mouseenter" eventOff="mouseleave click">
+              Copy
+            </ReactTooltip>
           </div>
         </div>
         <div className="editor-container" id="editor-container">
           <AceEditor
             placeholder="Type your code here"
             mode={language?(language.label==='c++'?'c_cpp':language.label): ""}
-            theme="github"
+            theme="monokai"
             name="code"
             className="editor-field"
             fontSize="1rem"
