@@ -14,21 +14,24 @@ import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 
+const api = process.env.REACT_APP_API_SERVER;
+
 const Editor = ({language, code, inputs, output, loading, setCode, setOutput, setLoading}) => {
   
-  const handleRun1 = () => {
+  const handleRun = () => {
     setOutput("");
     setLoading(true);
     let bufferObj1 = Buffer.from(code, 'utf-8');
     let bufferObj2 = Buffer.from(inputs, 'utf-8');
     const data = {
+      language: language.label,
       language_id: language.value,
       source_code: bufferObj1.toString('base64'),
       stdin: bufferObj2.toString('base64')
     }
     const jsonData = JSON.stringify(data);
     axios.post(
-      "http://localhost:8080/run",
+      api,
       {jsonData}
     ).then((res)=>{
       const { stdout, stderr, compile_output, exit_code, time, memory } = res.data;
@@ -60,34 +63,6 @@ const Editor = ({language, code, inputs, output, loading, setCode, setOutput, se
     })
   }
 
-  const handleRun2 = () => {
-    setOutput("");
-    setLoading(true);
-    let bufferObj1 = Buffer.from(code, 'utf-8');
-    let bufferObj2 = Buffer.from(inputs, 'utf-8');
-    const data = {
-      language: language.label,
-      source_code: bufferObj1.toString('base64'),
-      stdin: bufferObj2.toString('base64')
-    }
-    const jsonData = JSON.stringify(data);
-    axios.post(
-      "http://localhost:9999/run",
-      {jsonData}
-    ).then((res)=>{
-      const { stdout, stderr, compile_output} = res.data;
-      let outputObject = {
-        decodedOutput: stdout,
-        decodedError: stderr,
-        decodedCompileOutput: compile_output
-      };
-      setOutput(outputObject);
-      setLoading(false);
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
-
   const handleClear = () => {
     setCode("");
     setOutput("");
@@ -105,7 +80,7 @@ const Editor = ({language, code, inputs, output, loading, setCode, setOutput, se
             Editor
           </div>
           <div className="buttons">
-            <button data-tip='run' className="run-btn" disabled={code==="" || language===null} onClick={handleRun2}>
+            <button data-tip='run' className="run-btn" disabled={code==="" || language===null} onClick={handleRun}>
               <img src={run} alt="Run" />
             </button>
             <button data-tip data-for="copy" className="copy-btn" disabled={code===""} onClick={handleCopy}>
