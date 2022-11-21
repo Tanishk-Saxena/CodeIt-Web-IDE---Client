@@ -17,7 +17,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 const api = process.env.REACT_APP_API_SERVER;
 
 const headers = {
-  'Access-Control-Allow-Origin': ['*'],
+  'Access-Control-Allow-Origin': ["http://localhost:3000", "https://code-it-web-ide-client.vercel.app"],
   'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
   'Access-Control-Allow-Headers': 'Content-Type'
 }
