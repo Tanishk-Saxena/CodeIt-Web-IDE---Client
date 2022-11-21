@@ -16,12 +16,6 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 const api = process.env.REACT_APP_API_SERVER;
 
-const headers = {
-  'Access-Control-Allow-Origin': ["http://localhost:3000", "https://code-it-web-ide-client.vercel.app"],
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-  'Access-Control-Allow-Headers': 'Content-Type'
-}
-
 const Editor = ({language, code, inputs, output, loading, setCode, setOutput, setLoading}) => {
   
   const handleRun = () => {
@@ -38,8 +32,7 @@ const Editor = ({language, code, inputs, output, loading, setCode, setOutput, se
     const jsonData = JSON.stringify(data);
     axios.post(
       api,
-      {jsonData},
-      {headers: headers}
+      {jsonData}
     ).then((res)=>{
       const { stdout, stderr, compile_output, exit_code, time, memory } = res.data;
       let decodedOutput="", decodedError="", decodedCompileOutput="";
