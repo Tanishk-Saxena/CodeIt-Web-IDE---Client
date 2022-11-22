@@ -114,9 +114,9 @@ const Editor = ({language, code, inputs, output, loading, setCode, setOutput, se
             highlightActiveLine={true}
             value={code}
             setOptions={{
-              enableBasicAutocompletion: false,
-              enableLiveAutocompletion: false,
-              enableSnippets: false,
+              enableBasicAutocompletion: true,
+              enableLiveAutocompletion: true,
+              enableSnippets: true,
               showLineNumbers: true,
               tabSize: 2,
             }}
