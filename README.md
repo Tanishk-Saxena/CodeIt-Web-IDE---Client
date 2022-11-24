@@ -50,7 +50,7 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_SERVER` - backend to which you will connect this client for processing code and relaying output.
+`API_SERVER` - backend to which you will connect this client for processing code and relaying output. Either clone [server](https://github.com/Tanishk-Saxena/CodeIt-Web-IDE---server1) repository and use that locally, or use already hosted server: https://code-it-web-ide-server1.vercel.app/ .
 
 ## Documentation
 
